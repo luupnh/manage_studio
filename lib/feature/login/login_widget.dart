@@ -31,6 +31,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var paddingTotal = MediaQuery.of(context).viewPadding.top;
     return Material(
       color: ColorsCustom.backgroundColor,
       child: Container(
@@ -38,26 +39,30 @@ class _LoginWidgetState extends State<LoginWidget> {
             top: MediaQuery.of(context).viewPadding.top,
             bottom: MediaQuery.of(context).viewPadding.bottom),
         color: ColorsCustom.shadowColor,
-        child: Center(
-          child: SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.only(
-                  top: 30.0, left: 20.0, bottom: 30.0, right: 20.0),
-              decoration: BoxDecoration(
-                color: ColorsCustom.backgroundColor,
-                borderRadius: BorderRadius.circular(20.0),
-              ),
+        child: Container(
+          margin: EdgeInsets.only(
+              top: paddingTotal,
+              bottom: paddingTotal,
+              right: paddingTotal /2,
+              left: paddingTotal /2),
+          decoration: BoxDecoration(
+              color: ColorsCustom.backgroundColor,
+              borderRadius: BorderRadius.circular(20.0)),
+          child: Center(
+            child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
+                  //logo
                   Container(
                     height: 150.0,
                     padding: const EdgeInsets.only(left: 16.0, right: 16.0),
                     child: Image.asset(Images.logo_login, fit: BoxFit.fill),
                   ),
                   const SizedBox(height: 8.0),
+                  //form login
                   Container(
                     padding: const EdgeInsets.only(left: 16.0, right: 16.0),
                     child: Column(
@@ -67,7 +72,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           hintText: "Mật khẩu",
                           suffixIcon:
                               const Icon(FontAwesomeIcons.user, size: 15.0),
-                          // error: "Thông tin nhập vào bị lỗi",
+                          error: "Thông tin nhập vào bị lỗi",
                           keyboardType: TextInputType.text,
                           // textInputAction: textInputAction,
                           textCapitalization: TextCapitalization.none,
@@ -86,12 +91,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                           hintText: "SĐT hoặc Email",
                           keyboardType: TextInputType.text,
                           textCapitalization: TextCapitalization.none,
-                          suffixIcon:
-                              const Icon(FontAwesomeIcons.eye, size: 15.0, ),
+                          suffixIcon: const Icon(
+                            FontAwesomeIcons.eye,
+                            size: 15.0,
+                          ),
                           minLines: 1,
                           fontSize: 14.0,
                           obscureText: true,
-                          // error: "Thông tin nhập vào bị lỗi",
+                          error: "Thông tin nhập vào bị lỗi",
                           controller: _usernameController,
                           // focusNode: focusNode,
                           // nextFocus: nextFocus,
@@ -110,21 +117,20 @@ class _LoginWidgetState extends State<LoginWidget> {
                               isChecked: true,
                               textLeftCheckBox: "Ghi nhớ đăng nhập",
                             ),
-                            // const SizedBox(width: 15.0),
                             const Text("Quên mật khẩu?",
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     decoration: TextDecoration.none,
                                     fontFamily: 'AvoNormal',
-                                    fontSize: 10,
+                                    fontSize: 12,
                                     color: ColorsCustom.textLogin,
                                     overflow: TextOverflow.clip)),
                           ],
                         ),
-                        const SizedBox(height: 5.0),
+                        const SizedBox(height: 10.0),
                         Container(
-                          height: 30.0,
+                          height: 35.0,
                           width: 150.0,
                           decoration: BoxDecoration(
                               color: ColorsCustom.primaryColor,
@@ -143,11 +149,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 8.0),
+
+                  //footer
                   Center(
                     child: FittedBox(
                       child: Container(
-                        padding: EdgeInsets.only(
-                            right: 10.0, left: 10.0, top: 20.0, bottom: 20.0),
+                        padding: const EdgeInsets.only(
+                            right: 16.0, left: 16.0, top: 20.0, bottom: 10.0),
                         child: Column(
                           children: const [
                             Text(
@@ -165,7 +174,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                       ),
                     ),
-                  )
+                  ),
+                  const SizedBox(height: 8.0),
                 ],
               ),
             ),
