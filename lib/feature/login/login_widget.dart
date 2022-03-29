@@ -98,7 +98,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           minLines: 1,
                           fontSize: 14.0,
                           obscureText: true,
-                          error: "Thông tin nhập vào bị lỗi",
+                          // error: "Thông tin nhập vào bị lỗi",
                           controller: _usernameController,
                           // focusNode: focusNode,
                           // nextFocus: nextFocus,
