@@ -107,42 +107,45 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    TextFormField(
-                                      decoration: const InputDecoration(
-                                        icon: Icon(Icons.person),
-                                        hintText: 'What do people call you?',
-                                        labelText: 'Name *',
-                                      ),
-                                      onSaved: (String? value) {
-                                        // This optional block of code can be used to run
-                                        // code when the user saves the form.
-                                      },
-
-                                      validator: (String? value) {
-                                        print(value);
-                                        return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
-
-                                      },
+                                    AppTextField(
+                                      hintText: "SĐT hoặc email",
+                                      suffixIcon:
+                                      const Icon(FontAwesomeIcons.user, size: 15.0),
+                                      error:"Thông tin nhập vào không hợp lệ",
+                                      keyboardType: TextInputType.text,
+                                      isError: !state.isValidUserName,
+                                      // textInputAction: textInputAction,
+                                      textCapitalization: TextCapitalization.none,
+                                      minLines: 1,
+                                      maxLines: 1,
+                                      fontSize: 14.0,
+                                      controller: _usernameController,
+                                      focusNode: _usernameFocusNode,
+                                      // nextFocus: nextFocus,
+                                      focusElevation: 2.0,
+                                      // enabled: field.control.enabled,
+                                      onTextChanged: _validateUserName,
+                                      done: () {},
                                     ),
-                                    // AppTextField(
-                                    //   hintText: "Mật khẩu",
-                                    //   keyboardType: TextInputType.text,
-                                    //   textCapitalization: TextCapitalization.none,
-                                    //   suffixIcon: const Icon(
-                                    //     FontAwesomeIcons.eye,
-                                    //     size: 15.0,
-                                    //   ),
-                                    //   minLines: 1,
-                                    //   fontSize: 14.0,
-                                    //   obscureText: true,
-                                    //   error: state.isValidPassword ? "" : "Thông tin không hợp lệ",
-                                    //   controller: _passwordController,
-                                    //   onTextChanged: _validatePassword(),
-                                    //   focusNode: _passwordFocusNode,
-                                    //   focusElevation: 2.0,
-                                    //   enabled: true,
-                                    //   done: () {},
-                                    // ),
+                                    AppTextField(
+                                      hintText: "Mật khẩu",
+                                      keyboardType: TextInputType.text,
+                                      textCapitalization: TextCapitalization.none,
+                                      suffixIcon: const Icon(
+                                        FontAwesomeIcons.eye,
+                                        size: 15.0,
+                                      ),
+                                      minLines: 1,
+                                      fontSize: 14.0,
+                                      obscureText: true,
+                                      error: state.isValidPassword ? "" : "Thông tin không hợp lệ",
+                                      controller: _passwordController,
+                                      onTextChanged: _validatePassword(),
+                                      focusNode: _passwordFocusNode,
+                                      focusElevation: 2.0,
+                                      enabled: true,
+                                      done: () {},
+                                    ),
                                     const SizedBox(height: 8.0),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
