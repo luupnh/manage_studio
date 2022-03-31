@@ -3,33 +3,33 @@ import 'package:equatable/equatable.dart';
 class LoginState extends Equatable {
   final error;
   final bool isLoading;
-  final bool isValidUserName;
-  final bool isValidPassword;
+  final String? errorValidUserName;
+  final String? errorValidPassword;
   final bool obscureText;
 
   const LoginState({
     this.error,
-    this.isValidUserName = false,
-    this.isValidPassword = false,
+    this.errorValidUserName,
+    this.errorValidPassword,
     this.obscureText = true,
     this.isLoading = false,
   });
 
   @override
   List<Object?> get props =>
-      [isLoading, isValidUserName, isValidPassword, obscureText, error];
+      [isLoading, errorValidUserName, errorValidPassword, obscureText, error];
 
   LoginState copyWith({
     var error,
     bool? isLoading,
-    isValidUserName,
-    isValidPassword,
+    errorValidUserName,
+    errorValidPassword,
     obscureText,
   }) =>
       LoginState(
         error: error,
-        isValidUserName: isValidUserName ?? this.isValidUserName,
-        isValidPassword: isValidPassword ?? this.isValidPassword,
+        errorValidUserName: errorValidUserName ?? this.errorValidUserName,
+        errorValidPassword: errorValidPassword ?? this.errorValidPassword,
         obscureText: obscureText ?? this.obscureText,
         isLoading: isLoading ?? false,
       );

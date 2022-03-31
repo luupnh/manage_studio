@@ -1,25 +1,42 @@
+import 'package:manage_studio/resources/string_text.dart';
+
+
 extension StringValidator on String? {
+  bool get isNullOrEmpty => this?.isEmpty ?? true;
+
   bool get isNotNullOrNotEmpty => this?.isNotEmpty ?? false;
 
-  bool isValidUserName() {
-    if (!isNotNullOrNotEmpty) {
-      return false;
+  String isValidUserName() {
+    if (isNullOrEmpty) {
+      return AppString.notNullFormInput;
     } else {
       if (int.tryParse(this!) != null) {
-        return RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(this!);
+        if (RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(this!)) {
+          return AppString.inputValid;
+        } else {
+          return AppString.phoneNumberIsValid;
+        }
       } else {
-        return RegExp(
+        if (RegExp(
                 r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-            .hasMatch(this!);
+            .hasMatch(this!)) {
+          return AppString.inputValid;
+        } else {
+          return AppString.emailIsValid;
+        }
       }
     }
   }
 
-  bool isValidPassword() {
-    if (!isNotNullOrNotEmpty) {
-      return false;
+  String isValidPassword() {
+    if (isNullOrEmpty) {
+      return AppString.notNullFormInput;
     } else {
-      return this!.length > 7;
+      if (this!.length < 7) {
+        return AppString.passwordIsValid;
+      } else {
+        return AppString.inputValid;
+      }
     }
   }
 }

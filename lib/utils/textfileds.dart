@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:manage_studio/resources/colors.dart';
 
 class AppTextField extends StatelessWidget {
+
+  //field final
   final ValueChanged<String>? onTextChanged;
   final double focusElevation;
   final _errorElevation = 1.0;
@@ -33,6 +35,7 @@ class AppTextField extends StatelessWidget {
   final bool enabled;
   final bool isError;
 
+  //constructor
   const AppTextField({
     Key? key,
     this.onTextChanged,
@@ -62,7 +65,7 @@ class AppTextField extends StatelessWidget {
         const EdgeInsets.symmetric(vertical: 20, horizontal: 13),
     this.enabled = true,
     this.isError = false,
-  }) : super(key: key); //false
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -125,17 +128,15 @@ class AppTextField extends StatelessWidget {
               ),
               hintText: hintText,
               hintStyle: TextStyle(fontSize: fontSize, color: hintTextColor),
-              errorText: focusNode != null && focusNode?.hasPrimaryFocus == true
-                  ? (isError ? error : null)
-                  : null,
+              errorText: (error == "ok" ? null : error),
             ),
             minLines: minLines,
             maxLines: maxLines,
             maxLength: maxLength,
             obscureText: obscureText,
-            keyboardType: textInputAction == TextInputAction.newline
-                ? TextInputType.multiline
-                : keyboardType,
+            // keyboardType: textInputAction == TextInputAction.newline
+            //     ? TextInputType.multiline
+            //     : keyboardType,
             enabled: enabled,
             style: TextStyle(fontSize: fontSize, color: textColor),
             onFieldSubmitted: (v) {

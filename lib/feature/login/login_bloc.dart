@@ -11,14 +11,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<ValidateUserName>((event, emit) {
       emit(state.copyWith(
           isLoading: false,
-          isValidUserName: event.userName.isValidUserName(),
+          errorValidUserName: event.userName.isValidUserName(),
           error: state.error));
-      print(event.userName.isValidUserName());
+      print("isValidUser " + event.userName.isValidUserName().toString());
     });
     on<ValidatePassword>((event, emit) {
+      print("isValidPwd " + event.password.isValidPassword().toString());
       emit(state.copyWith(
           isLoading: false,
-          isValidPassword: event.password.isValidPassword(),
+          errorValidPassword: event.password.isValidPassword(),
           error: state.error));
     });
   }

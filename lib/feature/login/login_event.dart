@@ -12,13 +12,12 @@ class ShowPasswordClickedEvent extends LoginEvent {
 }
 
 class LoginClickedEvent extends LoginEvent {
-  final String userName;
-  final String password;
+  final String? userName;
+  final String? password;
 
-  LoginClickedEvent(
-    this.userName,
-    this.password,
-  );
+  LoginClickedEvent(this.userName, this.password);
+
+
 }
 
 class ValidateUserName extends LoginEvent {
