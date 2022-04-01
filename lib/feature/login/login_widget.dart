@@ -7,7 +7,7 @@ import 'package:manage_studio/feature/login/login_event.dart';
 import 'package:manage_studio/feature/login/login_state.dart';
 import 'package:manage_studio/resources/colors.dart';
 import 'package:manage_studio/resources/images.dart';
-import 'package:manage_studio/resources/string_text.dart';
+import 'package:manage_studio/resources/app_string.dart';
 import 'package:manage_studio/utils/app_button.dart';
 import 'package:manage_studio/utils/app_dialog.dart';
 import 'package:manage_studio/utils/enum_utils.dart';
@@ -102,7 +102,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       Container(
                         height: 150.0,
                         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                        child: Image.asset(Images.logo_login, fit: BoxFit.fill),
+                        child: Image.asset(Images.logoLogin, fit: BoxFit.fill),
                       ),
                       const SizedBox(height: 8.0),
                       //form login
@@ -113,7 +113,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           children: [
                             //username
                             AppTextFieldInput(
-                              hintText: AppString.usernameFormLogin,
+                              hintText: AppStrings.usernameFormLogin,
                               suffixIcon:
                                   const Icon(FontAwesomeIcons.user, size: 15.0),
                               error: state.errorValidUserName,
@@ -129,7 +129,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             ),
                             //password
                             AppTextFieldInput(
-                              hintText: AppString.passwordFormLogin,
+                              hintText: AppStrings.passwordFormLogin,
                               keyboardType: TextInputType.text,
                               textCapitalization: TextCapitalization.none,
                               suffixIcon:
@@ -156,9 +156,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 CheckBoxWidget(
                                   onChange: (value) {},
                                   isChecked: true,
-                                  textLeftCheckBox: AppString.rememberLogin,
+                                  textLeftCheckBox: AppStrings.rememberLogin,
                                 ),
-                                const Text(AppString.forgotPassword,
+                                const Text(AppStrings.forgotPassword,
                                     maxLines: 1,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -177,7 +177,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 _clickButtonLogin(_usernameController.text,
                                     _passwordController.text);
                               },
-                              text: AppString.buttonLogin,
+                              text: AppStrings.buttonLogin,
                               textColor: AppColors.textLoginSecond,
                             )
                           ],
@@ -194,7 +194,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 left: 16.0,
                                 top: 20.0,
                                 bottom: 10.0),
-                            child: const Text(AppString.hotline,
+                            child: const Text(AppStrings.hotline,
                                 maxLines: 3,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(

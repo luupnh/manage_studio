@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:manage_studio/resources/string_text.dart';
+import 'package:manage_studio/resources/app_string.dart';
 import 'package:manage_studio/utils/enum_utils.dart';
 import 'login_event.dart';
 import 'login_state.dart';
@@ -23,7 +23,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           error: state.error));
     });
     on<LoginEventClickedEvent>((event, emit) {
-      if(event.userName.isValidUserName() == AppString.inputValid && event.password.isValidUserName() == AppString.inputValid) {
+      if(event.userName.isValidUserName() == AppStrings.inputValid && event.password.isValidUserName() == AppStrings.inputValid) {
           emit(state.copyWith(
             clickedLoginStatus: LoginClickedStatus.success
           ));

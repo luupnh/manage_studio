@@ -1,4 +1,4 @@
-class AppString {
+class AppStrings {
   static const String usernameFormLogin = "SĐT hoặc email";
   static const String passwordFormLogin = "Mật khẩu";
   static const String forgotPassword = "Quên mật khẩu";
@@ -11,4 +11,15 @@ class AppString {
   static const String emailIsValid = "Email không hợp lệ";
   static const String passwordIsValid = "Mật khẩu ít nhất 8 kí tự";
   static const String inputValid = "ok";
+  static const String success = "Thành công!";
+  static const String warming = "Cảnh báo!";
+  static const String error = "Có lỗi!";
+  static const String updateIsHere = "Bản cập nhật đã có sẵn";
+  static const String deleteQuestion = "Bạn chắc chắn chứ?";
+  static const String close = "Đóng";
+  static const String areYouSure = "Bạn chắc chắn chứ?";
+  static const String writeReason = "Điền lý do";
+  static const String cancel = "Hủy";
+  static const String ok = "OK";
+
 }

@@ -1,4 +1,4 @@
-import 'package:manage_studio/resources/string_text.dart';
+import 'package:manage_studio/resources/app_string.dart';
 
 
 extension StringValidator on String? {
@@ -8,21 +8,21 @@ extension StringValidator on String? {
 
   String isValidUserName() {
     if (isNullOrEmpty) {
-      return AppString.notNullFormInput;
+      return AppStrings.notNullFormInput;
     } else {
       if (int.tryParse(this!) != null) {
         if (RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(this!)) {
-          return AppString.inputValid;
+          return AppStrings.inputValid;
         } else {
-          return AppString.phoneNumberIsValid;
+          return AppStrings.phoneNumberIsValid;
         }
       } else {
         if (RegExp(
                 r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
             .hasMatch(this!)) {
-          return AppString.inputValid;
+          return AppStrings.inputValid;
         } else {
-          return AppString.emailIsValid;
+          return AppStrings.emailIsValid;
         }
       }
     }
@@ -30,12 +30,12 @@ extension StringValidator on String? {
 
   String isValidPassword() {
     if (isNullOrEmpty) {
-      return AppString.notNullFormInput;
+      return AppStrings.notNullFormInput;
     } else {
       if (this!.length < 7) {
-        return AppString.passwordIsValid;
+        return AppStrings.passwordIsValid;
       } else {
-        return AppString.inputValid;
+        return AppStrings.inputValid;
       }
     }
   }
