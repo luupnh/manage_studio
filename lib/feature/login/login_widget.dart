@@ -8,8 +8,11 @@ import 'package:manage_studio/feature/login/login_state.dart';
 import 'package:manage_studio/resources/colors.dart';
 import 'package:manage_studio/resources/images.dart';
 import 'package:manage_studio/resources/string_text.dart';
+import 'package:manage_studio/utils/app_button.dart';
+import 'package:manage_studio/utils/app_dialog.dart';
+import 'package:manage_studio/utils/enum_utils.dart';
 
-import '../../utils/textfileds.dart';
+import '../../utils/app_textfield_input_form.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -30,6 +33,7 @@ class _LoginWidgetState extends State<LoginWidget> {
     _usernameController.dispose();
     _passwordController.dispose();
   }
+
   @override
   void initState() {
     super.initState();
@@ -40,6 +44,17 @@ class _LoginWidgetState extends State<LoginWidget> {
     bloc = LoginBloc()..add(LoginEvent());
     super.didChangeDependencies();
   }
+
+  _validateUserName(String usrName) =>
+      bloc.add(LoginEventValidateUserName(usrName));
+
+  _validatePassword(String pwd) => bloc.add(LoginEventValidatePassword(pwd));
+
+  _clickButtonLogin(String usrName, String pwd) =>
+      bloc.add(LoginEventClickedEvent(usrName, pwd));
+
+  _clickShowPassword(bool pwd) =>
+      bloc.add(LoginEventShowPasswordClicked(pwd = !pwd));
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +70,6 @@ class _LoginWidgetState extends State<LoginWidget> {
         ));
   }
 
-  _validateUserName(String name) => bloc.add(ValidateUserName(name));
-
-  _validatePassword(String pwd) => bloc.add(ValidatePassword(pwd));
-
   Widget _buildBody(BuildContext context, LoginState state) {
     var paddingTotal = MediaQuery.of(context).viewPadding.top;
     return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
@@ -66,12 +77,12 @@ class _LoginWidgetState extends State<LoginWidget> {
         return Container(color: Colors.red);
       } else {
         return Material(
-          color: ColorsCustom.backgroundColor,
+          color: AppColors.backgroundColor,
           child: Container(
             padding: EdgeInsets.only(
                 top: MediaQuery.of(context).viewPadding.top,
                 bottom: MediaQuery.of(context).viewPadding.bottom),
-            color: ColorsCustom.shadowColor,
+            color: AppColors.shadowColor,
             child: Container(
               margin: EdgeInsets.only(
                   top: paddingTotal,
@@ -79,7 +90,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   right: paddingTotal / 2,
                   left: paddingTotal / 2),
               decoration: BoxDecoration(
-                  color: ColorsCustom.backgroundColor,
+                  color: AppColors.backgroundColor,
                   borderRadius: BorderRadius.circular(20.0)),
               child: Center(
                 child: SingleChildScrollView(
@@ -101,7 +112,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             //username
-                            AppTextField(
+                            AppTextFieldInput(
                               hintText: AppString.usernameFormLogin,
                               suffixIcon:
                                   const Icon(FontAwesomeIcons.user, size: 15.0),
@@ -117,12 +128,16 @@ class _LoginWidgetState extends State<LoginWidget> {
                               done: () {},
                             ),
                             //password
-                            AppTextField(
+                            AppTextFieldInput(
                               hintText: AppString.passwordFormLogin,
                               keyboardType: TextInputType.text,
                               textCapitalization: TextCapitalization.none,
                               suffixIcon:
-                                  const Icon(FontAwesomeIcons.eye, size: 15.0),
+                                  // const Icon(FontAwesomeIcons.eye, size: 15.0),
+                                  IconButton(
+                                      icon: const Icon(FontAwesomeIcons.eye,
+                                          size: 15.0),
+                                      onPressed: () => _clickShowPassword),
                               minLines: 1,
                               fontSize: 14.0,
                               obscureText: true,
@@ -150,32 +165,20 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         decoration: TextDecoration.none,
                                         fontFamily: 'AvoNormal',
                                         fontSize: 12,
-                                        color: ColorsCustom.textLogin,
+                                        color: AppColors.textLogin,
                                         overflow: TextOverflow.clip)),
                               ],
                             ),
 
                             //Button đăng nhập
                             const SizedBox(height: 10.0),
-                            GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                height: 35.0,
-                                width: 150.0,
-                                decoration: BoxDecoration(
-                                    color: ColorsCustom.primaryColor,
-                                    borderRadius: BorderRadius.circular(5.0)),
-                                child: const Center(
-                                  child: Text(AppString.buttonLogin,
-                                      maxLines: 1,
-                                      style: TextStyle(
-                                          decoration: TextDecoration.none,
-                                          fontFamily: 'AvoBold',
-                                          fontSize: 14,
-                                          color: ColorsCustom.textLoginSecond,
-                                          overflow: TextOverflow.clip)),
-                                ),
-                              ),
+                            AppButton(
+                              onTap: () {
+                                _clickButtonLogin(_usernameController.text,
+                                    _passwordController.text);
+                              },
+                              text: AppString.buttonLogin,
+                              textColor: AppColors.textLoginSecond,
                             )
                           ],
                         ),
@@ -198,22 +201,32 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     decoration: TextDecoration.none,
                                     fontFamily: 'AvoNormal',
                                     fontSize: 14,
-                                    color: ColorsCustom.textLogin,
+                                    color: AppColors.textLogin,
                                     overflow: TextOverflow.clip)),
                           ),
                         ),
                       ),
-                              const SizedBox(height: 8.0),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                      const SizedBox(height: 8.0),
+                    ],
                   ),
-                );
-              }
+                ),
+              ),
+            ),
+          ),
+        );
+      }
     });
   }
 
-  void _handleAction(BuildContext context, LoginState state) {}
+  void _handleAction(BuildContext context, LoginState state) {
+    if (state.clickedLoginStatus == LoginClickedStatus.isValid) {
+      showMyDialog(context);
+    }
+    if (state.clickedLoginStatus == LoginClickedStatus.failed) {
+      // DInfo.dialogError("Đăng nhập thất bại");
+    }
+    if (state.clickedLoginStatus == LoginClickedStatus.success) {
+      // DInfo.toastSuccess("Đăng nhập thành công");
+    }
+  }
 }

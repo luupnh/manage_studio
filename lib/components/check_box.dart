@@ -28,7 +28,7 @@ class CheckBoxWidget extends StatelessWidget {
             child: Checkbox(
                 checkColor: Colors.white,
                 value: isChecked,
-                activeColor: ColorsCustom.primaryColor,
+                activeColor: AppColors.primaryColor,
                 onChanged: onChange),
           ),
           if (textLeftCheckBox.isNotNullOrNotEmpty)
@@ -39,7 +39,7 @@ class CheckBoxWidget extends StatelessWidget {
                   decoration: TextDecoration.none,
                   fontFamily: 'AvoNormal',
                   fontSize: 12,
-                  color: ColorsCustom.textLogin,
+                  color: AppColors.textLogin,
                   overflow: TextOverflow.clip),
             )
         ],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:manage_studio/resources/colors.dart';
 
-class AppTextField extends StatelessWidget {
+class AppTextFieldInput extends StatelessWidget {
 
   //field final
   final ValueChanged<String>? onTextChanged;
@@ -36,7 +36,7 @@ class AppTextField extends StatelessWidget {
   final bool isError;
 
   //constructor
-  const AppTextField({
+  const AppTextFieldInput({
     Key? key,
     this.onTextChanged,
     this.focusElevation = 6.0,
@@ -80,9 +80,9 @@ class AppTextField extends StatelessWidget {
           data: Theme.of(context).copyWith(
               colorScheme: Theme.of(context)
                   .colorScheme
-                  .copyWith(primary: ColorsCustom.primaryColor)),
+                  .copyWith(primary: AppColors.primaryColor)),
           child: TextFormField(
-            cursorColor: ColorsCustom.primaryColor,
+            cursorColor: AppColors.primaryColor,
             onChanged: onTextChanged,
             textAlign: TextAlign.start,
             controller: controller,
@@ -109,7 +109,7 @@ class AppTextField extends StatelessWidget {
               //   // borderSide: isError
               //   //     ? const BorderSide(color: Colors.red, width: 1)
               //   //     : const BorderSide(
-              //   //         color: ColorsCustom.primaryColor, width: 1),
+              //   //         color: AppColors.primaryColor, width: 1),
               // ),
               // enabledBorder: OutlineInputBorder(
               //     borderRadius: BorderRadius.all(Radius.circular(_radius)),
@@ -118,7 +118,7 @@ class AppTextField extends StatelessWidget {
               //         : (isError
               //             ? const BorderSide(color: Colors.red)
               //             : const BorderSide(
-              //                 color: ColorsCustom.primaryColor, width: 1))
+              //                 color: AppColors.primaryColor, width: 1))
               //     // borderSide: isError
               //     //     ? const BorderSide(color: Colors.red)
               //     //     : BorderSide(color: Colors.black.withOpacity(0.8)),

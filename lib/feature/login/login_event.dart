@@ -5,28 +5,28 @@ class LoginEvent {
   }
 }
 
-class ShowPasswordClickedEvent extends LoginEvent {
+class LoginEventShowPasswordClicked extends LoginEvent {
   final bool obscureText;
 
-  ShowPasswordClickedEvent(this.obscureText);
+  LoginEventShowPasswordClicked(this.obscureText);
 }
 
-class LoginClickedEvent extends LoginEvent {
+class LoginEventClickedEvent extends LoginEvent {
   final String? userName;
   final String? password;
 
-  LoginClickedEvent(this.userName, this.password);
+  LoginEventClickedEvent(this.userName, this.password);
 
 
 }
 
-class ValidateUserName extends LoginEvent {
+class LoginEventValidateUserName extends LoginEvent {
   final String userName;
-  ValidateUserName(this.userName);
+  LoginEventValidateUserName(this.userName);
 }
 
-class ValidatePassword extends LoginEvent {
+class LoginEventValidatePassword extends LoginEvent {
   final String password;
 
-  ValidatePassword(this.password);
+  LoginEventValidatePassword(this.password);
 }
