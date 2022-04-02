@@ -6,9 +6,6 @@ class LoginEvent {
 }
 
 class LoginEventShowPasswordClicked extends LoginEvent {
-  final bool obscureText;
-
-  LoginEventShowPasswordClicked(this.obscureText);
 }
 
 class LoginEventClickedEvent extends LoginEvent {

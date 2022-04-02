@@ -1,7 +1,7 @@
 class AppStrings {
   static const String usernameFormLogin = "SĐT hoặc email";
   static const String passwordFormLogin = "Mật khẩu";
-  static const String forgotPassword = "Quên mật khẩu";
+  static const String forgotPassword = "Quên mật khẩu?";
   static const String rememberLogin = "Ghi nhớ đăng nhập";
   static const String buttonLogin = "Đăng nhập";
   static const String hotline =

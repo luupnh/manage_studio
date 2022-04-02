@@ -8,25 +8,33 @@ import 'package:manage_studio/utils/string_validator.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(const LoginState(isLoading: true)) {
     on<LoginEvent>((event, emit) {
-      emit(state.copyWith(isLoading: false));
+      emit(state.copyWith(
+          isLoading: false, clickedLoginStatus: LoginClickedStatus.notStarted));
     });
     on<LoginEventValidateUserName>((event, emit) {
       emit(state.copyWith(
           isLoading: false,
           errorValidUserName: event.userName.isValidUserName(),
+          clickedLoginStatus: LoginClickedStatus.notStarted,
           error: state.error));
     });
     on<LoginEventValidatePassword>((event, emit) {
       emit(state.copyWith(
           isLoading: false,
           errorValidPassword: event.password.isValidPassword(),
+          clickedLoginStatus: LoginClickedStatus.notStarted,
+          error: state.error));
+    });
+    on<LoginEventShowPasswordClicked>((event, emit) {
+      emit(state.copyWith(
+          isLoading: false,
+          obscureText: !state.obscureText,
           error: state.error));
     });
     on<LoginEventClickedEvent>((event, emit) {
-      if(event.userName.isValidUserName() == AppStrings.inputValid && event.password.isValidUserName() == AppStrings.inputValid) {
-          emit(state.copyWith(
-            clickedLoginStatus: LoginClickedStatus.success
-          ));
+      if (event.userName.isValidUserName() == AppStrings.inputValid &&
+          event.password.isValidPassword() == AppStrings.inputValid) {
+        emit(state.copyWith(clickedLoginStatus: LoginClickedStatus.success));
       } else {
         emit(state.copyWith(
             isLoading: false,

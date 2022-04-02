@@ -53,8 +53,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   _clickButtonLogin(String usrName, String pwd) =>
       bloc.add(LoginEventClickedEvent(usrName, pwd));
 
-  _clickShowPassword(bool pwd) =>
-      bloc.add(LoginEventShowPasswordClicked(pwd = !pwd));
+  _clickShowPassword() => bloc.add(LoginEventShowPasswordClicked());
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +126,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               onTextChanged: _validateUserName,
                               done: () {},
                             ),
+
                             //password
                             AppTextFieldInput(
                               hintText: AppStrings.passwordFormLogin,
@@ -135,12 +135,17 @@ class _LoginWidgetState extends State<LoginWidget> {
                               suffixIcon:
                                   // const Icon(FontAwesomeIcons.eye, size: 15.0),
                                   IconButton(
-                                      icon: const Icon(FontAwesomeIcons.eye,
+                                      icon: Icon(
+                                          state.obscureText
+                                              ? FontAwesomeIcons.eye
+                                              : FontAwesomeIcons.eyeSlash,
                                           size: 15.0),
-                                      onPressed: () => _clickShowPassword),
+                                      onPressed: () {
+                                        _clickShowPassword();
+                                      }),
                               minLines: 1,
                               fontSize: 14.0,
-                              obscureText: true,
+                              obscureText: state.obscureText,
                               error: state.errorValidPassword,
                               controller: _passwordController,
                               onTextChanged: _validatePassword,
@@ -165,7 +170,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         decoration: TextDecoration.none,
                                         fontFamily: 'AvoNormal',
                                         fontSize: 12,
-                                        color: AppColors.textLogin,
+                                        color: AppColors.primaryColor,
                                         overflow: TextOverflow.clip)),
                               ],
                             ),
@@ -220,6 +225,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   void _handleAction(BuildContext context, LoginState state) {
     if (state.clickedLoginStatus == LoginClickedStatus.isValid) {
+      print("status click button" + state.clickedLoginStatus.toString());
       showMyDialog(context);
     }
     if (state.clickedLoginStatus == LoginClickedStatus.failed) {
