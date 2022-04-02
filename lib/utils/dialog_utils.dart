@@ -31,9 +31,9 @@ extension DialogTypeExtension on DialogType {
       case DialogType.success:
         return const AppIcon(Images.iSuccess);
       case DialogType.error:
-        return const AppIcon(Images.iReject);
-      case DialogType.reject:
         return const AppIcon(Images.iError);
+      case DialogType.reject:
+        return const AppIcon(Images.iReject);
       case DialogType.warning:
         return const AppIcon(Images.iWarning);
       case DialogType.delete:

@@ -226,7 +226,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   void _handleAction(BuildContext context, LoginState state) {
     if (state.clickedLoginStatus == LoginClickedStatus.isValid) {
       print("status click button" + state.clickedLoginStatus.toString());
-      showMyDialog(context);
+      showErrorDialogWith(state.error,context);
     }
     if (state.clickedLoginStatus == LoginClickedStatus.failed) {
       // DInfo.dialogError("Đăng nhập thất bại");

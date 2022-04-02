@@ -11,6 +11,8 @@ class AppStrings {
   static const String emailIsValid = "Email không hợp lệ";
   static const String passwordIsValid = "Mật khẩu ít nhất 8 kí tự";
   static const String inputValid = "ok";
+  static const String errorInputIsValid = "Thông tin điền vào chưa hợp lệ";
+
   static const String success = "Thành công!";
   static const String warming = "Cảnh báo!";
   static const String error = "Có lỗi!";
@@ -21,5 +23,6 @@ class AppStrings {
   static const String writeReason = "Điền lý do";
   static const String cancel = "Hủy";
   static const String ok = "OK";
+  static const String tryAgain = "Vui lòng thử lại!";
 
 }
