@@ -26,4 +26,12 @@ class AppStrings {
   static const String tryAgain = "Vui lòng thử lại!";
   static const String waitPlease = "Vui lòng đợi..." ;
 
+  static const String titleAppBar = "Quán Dê 19 Liên Hương" ;
+  static const String titleCalendarAppBar = "Hôm nay" ;
+  static const String totalRevenue = "Tổng quan doanh thu" ;
+  static const String product = "Mặt hàng" ;
+
+
+
+
 }

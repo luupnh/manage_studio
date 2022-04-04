@@ -43,6 +43,7 @@ dependencies:
 #  reactive_forms: ^11.0.1
 #  d_info: ^0.0.6
   flutter_svg: ^1.0.3
+  badges: ^2.0.2
 
 dev_dependencies:
   flutter_test:

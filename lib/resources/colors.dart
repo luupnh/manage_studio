@@ -10,7 +10,9 @@ class AppColors {
   static const Color buttonColor = Color(0xfff73164);
   static const Color shadowColor = Color(0xFFE9E9E9);
   static const Color textColorsBlack = Color(0xFF000000);
-  static const Color textColorsBlackSecond = Color(0xffffffff);
+  static const Color textColorsBlue = Color(0xFF028DCD);
+
+  static const Color textColorsWhite = Color(0xffffffff);
   static const Color waitingIndicator = Color(0xffffffff);
 
 

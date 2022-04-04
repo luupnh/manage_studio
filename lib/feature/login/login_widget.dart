@@ -185,7 +185,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     _passwordController.text);
                               },
                               text: AppStrings.buttonLogin,
-                              textColor: AppColors.textColorsBlackSecond,
+                              textColor: AppColors.textColorsWhite,
                             )
                           ],
                         ),
@@ -207,7 +207,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     decoration: TextDecoration.none,
                                     fontFamily: 'AvoNormal',
                                     fontSize: 14,
-                                    color: AppColors.textColorsBlack,
+                                    color: AppColors.textColorsWhite,
                                     overflow: TextOverflow.clip)),
                           ),
                         ),
