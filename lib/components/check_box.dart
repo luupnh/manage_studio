@@ -39,7 +39,7 @@ class CheckBoxWidget extends StatelessWidget {
                   decoration: TextDecoration.none,
                   fontFamily: 'AvoNormal',
                   fontSize: 12,
-                  color: AppColors.textLogin,
+                  color: AppColors.textColorsBlack,
                   overflow: TextOverflow.clip),
             )
         ],

@@ -6,8 +6,8 @@ class AppIcon extends StatelessWidget {
   final Color? color;
   final BoxFit? boxFit;
 
-  const AppIcon( this.path, {Key? key, this.color, this.boxFit}) : super(key: key);
-
+  const AppIcon(this.path, {Key? key, this.color, this.boxFit})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +15,7 @@ class AppIcon extends StatelessWidget {
       return SvgPicture.asset(path, color: color);
     }
 
-    return Image.asset(path, color: color, fit: boxFit ?? BoxFit.none);
+    return SizedBox(
+        child: Image.asset(path, color: color, fit: boxFit ?? BoxFit.fill));
   }
 }

@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:manage_studio/components/check_box.dart';
+import 'package:manage_studio/feature/home/home_widget.dart';
 import 'package:manage_studio/feature/login/login_bloc.dart';
 import 'package:manage_studio/feature/login/login_event.dart';
 import 'package:manage_studio/feature/login/login_state.dart';
@@ -9,6 +11,7 @@ import 'package:manage_studio/resources/colors.dart';
 import 'package:manage_studio/resources/images.dart';
 import 'package:manage_studio/resources/app_string.dart';
 import 'package:manage_studio/utils/app_button.dart';
+import 'package:manage_studio/utils/app_dialog.dart';
 import 'package:manage_studio/utils/app_dialog.dart';
 import 'package:manage_studio/utils/enum_utils.dart';
 
@@ -82,28 +85,27 @@ class _LoginWidgetState extends State<LoginWidget> {
                 top: MediaQuery.of(context).viewPadding.top,
                 bottom: MediaQuery.of(context).viewPadding.bottom),
             color: AppColors.shadowColor,
-            child: Container(
-              margin: EdgeInsets.only(
-                  top: paddingTotal,
-                  bottom: paddingTotal,
-                  right: paddingTotal / 2,
-                  left: paddingTotal / 2),
-              decoration: BoxDecoration(
-                  color: AppColors.backgroundColor,
-                  borderRadius: BorderRadius.circular(20.0)),
-              child: Center(
-                child: SingleChildScrollView(
+            child: Center(
+              child: SingleChildScrollView(
+                child: Container(
+                  margin: EdgeInsets.only(
+                      top: paddingTotal,
+                      bottom: paddingTotal,
+                      right: paddingTotal / 2,
+                      left: paddingTotal / 2),
+                  decoration: BoxDecoration(
+                      color: AppColors.backgroundColor,
+                      borderRadius: BorderRadius.circular(20.0)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       //logo
                       Container(
-                        height: 150.0,
+                        height: 150,
                         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
                         child: Image.asset(Images.logoLogin, fit: BoxFit.fill),
                       ),
-                      const SizedBox(height: 8.0),
                       //form login
                       Container(
                         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
@@ -183,12 +185,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     _passwordController.text);
                               },
                               text: AppStrings.buttonLogin,
-                              textColor: AppColors.textLoginSecond,
+                              textColor: AppColors.textColorsBlackSecond,
                             )
                           ],
                         ),
                       ),
-                      const SizedBox(height: 8.0),
 
                       //footer
                       Center(
@@ -206,12 +207,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     decoration: TextDecoration.none,
                                     fontFamily: 'AvoNormal',
                                     fontSize: 14,
-                                    color: AppColors.textLogin,
+                                    color: AppColors.textColorsBlack,
                                     overflow: TextOverflow.clip)),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 8.0),
                     ],
                   ),
                 ),
@@ -223,16 +223,18 @@ class _LoginWidgetState extends State<LoginWidget> {
     });
   }
 
-  void _handleAction(BuildContext context, LoginState state) {
+  Future<void> _handleAction(BuildContext context, LoginState state) async {
     if (state.clickedLoginStatus == LoginClickedStatus.isValid) {
       print("status click button" + state.clickedLoginStatus.toString());
-      showErrorDialogWith(state.error,context);
+      DialogBuilder(context).showDialogError();
     }
     if (state.clickedLoginStatus == LoginClickedStatus.failed) {
-      // DInfo.dialogError("Đăng nhập thất bại");
     }
     if (state.clickedLoginStatus == LoginClickedStatus.success) {
-      // DInfo.toastSuccess("Đăng nhập thành công");
+      DialogBuilder(context).showDialogLoading(function: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomeWidget()));
+      });
     }
   }
 }

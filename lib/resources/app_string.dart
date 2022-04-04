@@ -14,7 +14,7 @@ class AppStrings {
   static const String errorInputIsValid = "Thông tin điền vào chưa hợp lệ";
 
   static const String success = "Thành công!";
-  static const String warming = "Cảnh báo!";
+  static const String warning = "Cảnh báo!";
   static const String error = "Có lỗi!";
   static const String updateIsHere = "Bản cập nhật đã có sẵn";
   static const String deleteQuestion = "Bạn chắc chắn chứ?";
@@ -24,5 +24,6 @@ class AppStrings {
   static const String cancel = "Hủy";
   static const String ok = "OK";
   static const String tryAgain = "Vui lòng thử lại!";
+  static const String waitPlease = "Vui lòng đợi..." ;
 
 }

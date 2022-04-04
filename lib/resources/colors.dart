@@ -9,8 +9,13 @@ class AppColors {
   static const Color secondaryColor = Color(0xffffc656);
   static const Color buttonColor = Color(0xfff73164);
   static const Color shadowColor = Color(0xFFE9E9E9);
-  static const Color textLogin = Color(0xFF000000);
-  static const Color textLoginSecond = Color(0xffffffff);
+  static const Color textColorsBlack = Color(0xFF000000);
+  static const Color textColorsBlackSecond = Color(0xffffffff);
+  static const Color waitingIndicator = Color(0xffffffff);
+
+
+
+
   static const Color black_08 = Color(0xFF333333);
   static const Color black_06 = Color(0xFF606060);
   static const Color black40 = Color(0xFF8B8B8B);
