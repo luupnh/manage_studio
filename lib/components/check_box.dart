@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:manage_studio/resources/colors.dart';
-import 'package:manage_studio/utils/checkText.dart';
+import 'package:manage_studio/utils/string_validator.dart';
 
 class CheckBoxWidget extends StatelessWidget {
   final bool isChecked;
@@ -28,10 +28,10 @@ class CheckBoxWidget extends StatelessWidget {
             child: Checkbox(
                 checkColor: Colors.white,
                 value: isChecked,
-                activeColor: ColorsCustom.primaryColor,
+                activeColor: AppColors.primaryColor,
                 onChanged: onChange),
           ),
-          if (textLeftCheckBox.isNullOrEmpty)
+          if (textLeftCheckBox.isNotNullOrNotEmpty)
             Text(
               textLeftCheckBox!,
               maxLines: 1,
@@ -39,7 +39,7 @@ class CheckBoxWidget extends StatelessWidget {
                   decoration: TextDecoration.none,
                   fontFamily: 'AvoNormal',
                   fontSize: 12,
-                  color: ColorsCustom.textLogin,
+                  color: AppColors.textColorsBlack,
                   overflow: TextOverflow.clip),
             )
         ],

@@ -1,10 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:manage_studio/components/check_box.dart';
+import 'package:manage_studio/feature/home/home_widget.dart';
+import 'package:manage_studio/feature/login/login_bloc.dart';
+import 'package:manage_studio/feature/login/login_event.dart';
+import 'package:manage_studio/feature/login/login_state.dart';
 import 'package:manage_studio/resources/colors.dart';
 import 'package:manage_studio/resources/images.dart';
+import 'package:manage_studio/resources/app_string.dart';
+import 'package:manage_studio/utils/app_button.dart';
+import 'package:manage_studio/utils/app_dialog.dart';
+import 'package:manage_studio/utils/app_dialog.dart';
+import 'package:manage_studio/utils/enum_utils.dart';
 
-import '../../utils/textfileds.dart';
+import '../../utils/app_textfield_input_form.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -15,173 +26,215 @@ class LoginWidget extends StatefulWidget {
 
 class _LoginWidgetState extends State<LoginWidget> {
   final TextEditingController _usernameController = TextEditingController();
-  final _usernameFocusNode = FocusNode();
 
   final TextEditingController _passwordController = TextEditingController();
-  final _passwordFocusNode = FocusNode();
+  late LoginBloc bloc;
 
   @override
   void dispose() {
     super.dispose();
     _usernameController.dispose();
     _passwordController.dispose();
-    _usernameFocusNode.dispose();
-    _passwordFocusNode.dispose();
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    bloc = LoginBloc()..add(LoginEvent());
+    super.didChangeDependencies();
+  }
+
+  _validateUserName(String usrName) =>
+      bloc.add(LoginEventValidateUserName(usrName));
+
+  _validatePassword(String pwd) => bloc.add(LoginEventValidatePassword(pwd));
+
+  _clickButtonLogin(String usrName, String pwd) =>
+      bloc.add(LoginEventClickedEvent(usrName, pwd));
+
+  _clickShowPassword() => bloc.add(LoginEventShowPasswordClicked());
+
+  @override
   Widget build(BuildContext context) {
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<LoginBloc>(
+            create: (BuildContext context) => bloc,
+          ),
+        ],
+        child: BlocConsumer<LoginBloc, LoginState>(
+          listener: _handleAction,
+          builder: _buildBody,
+        ));
+  }
+
+  Widget _buildBody(BuildContext context, LoginState state) {
     var paddingTotal = MediaQuery.of(context).viewPadding.top;
-    return Material(
-      color: ColorsCustom.backgroundColor,
-      child: Container(
-        padding: EdgeInsets.only(
-            top: MediaQuery.of(context).viewPadding.top,
-            bottom: MediaQuery.of(context).viewPadding.bottom),
-        color: ColorsCustom.shadowColor,
-        child: Container(
-          margin: EdgeInsets.only(
-              top: paddingTotal,
-              bottom: paddingTotal,
-              right: paddingTotal /2,
-              left: paddingTotal /2),
-          decoration: BoxDecoration(
-              color: ColorsCustom.backgroundColor,
-              borderRadius: BorderRadius.circular(20.0)),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  //logo
-                  Container(
-                    height: 150.0,
-                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: Image.asset(Images.logo_login, fit: BoxFit.fill),
-                  ),
-                  const SizedBox(height: 8.0),
-                  //form login
-                  Container(
-                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AppTextField(
-                          hintText: "Mật khẩu",
-                          suffixIcon:
-                              const Icon(FontAwesomeIcons.user, size: 15.0),
-                          error: "Thông tin nhập vào bị lỗi",
-                          keyboardType: TextInputType.text,
-                          // textInputAction: textInputAction,
-                          textCapitalization: TextCapitalization.none,
-                          minLines: 1,
-                          maxLines: 1,
-                          fontSize: 14.0,
-                          controller: _passwordController,
-                          // focusNode: focusNode,
-                          // nextFocus: nextFocus,
-                          focusElevation: 2.0,
-                          // enabled: field.control.enabled,
-                          // onTextChanged: field.didChange,
-                          done: () {},
-                        ),
-                        AppTextField(
-                          hintText: "SĐT hoặc Email",
-                          keyboardType: TextInputType.text,
-                          textCapitalization: TextCapitalization.none,
-                          suffixIcon: const Icon(
-                            FontAwesomeIcons.eye,
-                            size: 15.0,
-                          ),
-                          minLines: 1,
-                          fontSize: 14.0,
-                          obscureText: true,
-                          error: "Thông tin nhập vào bị lỗi",
-                          controller: _usernameController,
-                          // focusNode: focusNode,
-                          // nextFocus: nextFocus,
-                          focusElevation: 2.0,
-                          enabled: true,
-                          // onTextChanged: field.didChange,
-                          done: () {},
-                        ),
-                        const SizedBox(height: 8.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+    return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+      if (state.isLoading) {
+        return Container(color: Colors.red);
+      } else {
+        return Material(
+          color: AppColors.backgroundColor,
+          child: Container(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).viewPadding.top,
+                bottom: MediaQuery.of(context).viewPadding.bottom),
+            color: AppColors.shadowColor,
+            child: Center(
+              child: SingleChildScrollView(
+                child: Container(
+                  margin: EdgeInsets.only(
+                      top: paddingTotal,
+                      bottom: paddingTotal,
+                      right: paddingTotal / 2,
+                      left: paddingTotal / 2),
+                  decoration: BoxDecoration(
+                      color: AppColors.backgroundColor,
+                      borderRadius: BorderRadius.circular(20.0)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      //logo
+                      Container(
+                        height: 150,
+                        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                        child: Image.asset(Images.logoLogin, fit: BoxFit.fill),
+                      ),
+                      //form login
+                      Container(
+                        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            CheckBoxWidget(
-                              onChange: (value) {},
-                              isChecked: true,
-                              textLeftCheckBox: "Ghi nhớ đăng nhập",
+                            //username
+                            AppTextFieldInput(
+                              hintText: AppStrings.usernameFormLogin,
+                              suffixIcon:
+                                  const Icon(FontAwesomeIcons.user, size: 15.0),
+                              error: state.errorValidUserName,
+                              keyboardType: TextInputType.text,
+                              textCapitalization: TextCapitalization.none,
+                              minLines: 1,
+                              maxLines: 1,
+                              fontSize: 14.0,
+                              controller: _usernameController,
+                              focusElevation: 2.0,
+                              onTextChanged: _validateUserName,
+                              done: () {},
                             ),
-                            const Text("Quên mật khẩu?",
-                                maxLines: 1,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    decoration: TextDecoration.none,
-                                    fontFamily: 'AvoNormal',
-                                    fontSize: 12,
-                                    color: ColorsCustom.textLogin,
-                                    overflow: TextOverflow.clip)),
+
+                            //password
+                            AppTextFieldInput(
+                              hintText: AppStrings.passwordFormLogin,
+                              keyboardType: TextInputType.text,
+                              textCapitalization: TextCapitalization.none,
+                              suffixIcon:
+                                  // const Icon(FontAwesomeIcons.eye, size: 15.0),
+                                  IconButton(
+                                      icon: Icon(
+                                          state.obscureText
+                                              ? FontAwesomeIcons.eye
+                                              : FontAwesomeIcons.eyeSlash,
+                                          size: 15.0),
+                                      onPressed: () {
+                                        _clickShowPassword();
+                                      }),
+                              minLines: 1,
+                              fontSize: 14.0,
+                              obscureText: state.obscureText,
+                              error: state.errorValidPassword,
+                              controller: _passwordController,
+                              onTextChanged: _validatePassword,
+                              focusElevation: 2.0,
+                              done: () {},
+                            ),
+                            const SizedBox(height: 8.0),
+                            //Quên mật khẩu - Ghi nhớ đăng nhập
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                CheckBoxWidget(
+                                  onChange: (value) {},
+                                  isChecked: true,
+                                  textLeftCheckBox: AppStrings.rememberLogin,
+                                ),
+                                const Text(AppStrings.forgotPassword,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        decoration: TextDecoration.none,
+                                        fontFamily: 'AvoNormal',
+                                        fontSize: 12,
+                                        color: AppColors.primaryColor,
+                                        overflow: TextOverflow.clip)),
+                              ],
+                            ),
+
+                            //Button đăng nhập
+                            const SizedBox(height: 10.0),
+                            AppButton(
+                              onTap: () {
+                                _clickButtonLogin(_usernameController.text,
+                                    _passwordController.text);
+                              },
+                              text: AppStrings.buttonLogin,
+                              textColor: AppColors.textColorsBlackSecond,
+                            )
                           ],
                         ),
-                        const SizedBox(height: 10.0),
-                        Container(
-                          height: 35.0,
-                          width: 150.0,
-                          decoration: BoxDecoration(
-                              color: ColorsCustom.primaryColor,
-                              borderRadius: BorderRadius.circular(5.0)),
-                          child: const Center(
-                            child: Text("Đăng nhập",
-                                maxLines: 1,
-                                style: TextStyle(
-                                    decoration: TextDecoration.none,
-                                    fontFamily: 'AvoBold',
-                                    fontSize: 14,
-                                    color: ColorsCustom.textLoginSecond,
-                                    overflow: TextOverflow.clip)),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 8.0),
+                      ),
 
-                  //footer
-                  Center(
-                    child: FittedBox(
-                      child: Container(
-                        padding: const EdgeInsets.only(
-                            right: 16.0, left: 16.0, top: 20.0, bottom: 10.0),
-                        child: Column(
-                          children: const [
-                            Text(
-                                "Hotline hỗ trợ: 0327631921 \n\ Hỗ trợ khách hàng các ngày trong tuần từ \n\ "
-                                "thứ 2 đến Chủ nhật (từ 8h00 – 22h00 hàng ngày)",
+                      //footer
+                      Center(
+                        child: FittedBox(
+                          child: Container(
+                            padding: const EdgeInsets.only(
+                                right: 16.0,
+                                left: 16.0,
+                                top: 20.0,
+                                bottom: 10.0),
+                            child: const Text(AppStrings.hotline,
                                 maxLines: 3,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     decoration: TextDecoration.none,
                                     fontFamily: 'AvoNormal',
                                     fontSize: 14,
-                                    color: ColorsCustom.textLogin,
+                                    color: AppColors.textColorsBlack,
                                     overflow: TextOverflow.clip)),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                  const SizedBox(height: 8.0),
-                ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
-    );
+        );
+      }
+    });
+  }
+
+  Future<void> _handleAction(BuildContext context, LoginState state) async {
+    if (state.clickedLoginStatus == LoginClickedStatus.isValid) {
+      print("status click button" + state.clickedLoginStatus.toString());
+      DialogBuilder(context).showDialogError();
+    }
+    if (state.clickedLoginStatus == LoginClickedStatus.failed) {
+    }
+    if (state.clickedLoginStatus == LoginClickedStatus.success) {
+      DialogBuilder(context).showDialogLoading(function: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomeWidget()));
+      });
+    }
   }
 }
