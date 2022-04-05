@@ -30,6 +30,8 @@ class AppStrings {
   static const String titleCalendarAppBar = "Hôm nay" ;
   static const String totalRevenue = "Tổng quan doanh thu" ;
   static const String product = "Mặt hàng" ;
+  static const String averageProductBill = "Trung bình mặt hàng/Hóa Đơn" ;
+
 
 
 
