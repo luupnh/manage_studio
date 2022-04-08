@@ -17,5 +17,6 @@ class Images {
   static const Icon iTitleAppBar = Icon(FontAwesomeIcons.angleDown, size: 14, color: AppColors.textColorsWhite);
   static const Icon iNotification = Icon(FontAwesomeIcons.bell, size: 25, color: AppColors.textColorsWhite);
   static const Icon iCalendarTitleAppBar = Icon(FontAwesomeIcons.calendarMinus , size: 20, color: AppColors.textColorsWhite);
+  static const Icon iDropdown = Icon(FontAwesomeIcons.squareCaretDown , size: 20, color: AppColors.textColorsWhite);
 
 }
