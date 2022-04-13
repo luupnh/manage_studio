@@ -98,8 +98,8 @@ class AppTextFieldInput extends StatelessWidget {
       this.isError = false,
       this.initialValue})
       : colorScheme = AppInputTextFieldColorScheme.white,
-        textColor = AppColors.black80,
-        hintTextColor = AppColors.black40,
+        textColor = Colors.black,
+        hintTextColor = Colors.black,
         super(key: key);
 
   @override
@@ -109,7 +109,7 @@ class AppTextFieldInput extends StatelessWidget {
       if (enabled ?? true) {
         fillColor = Colors.white;
       } else {
-        fillColor = AppColors.greyLight;
+        fillColor = Colors.blueGrey;
       }
     } else {
       fillColor = AppColors.backgroundLight;

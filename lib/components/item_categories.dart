@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:manage_studio/resources/app_icon.dart';
 import 'package:manage_studio/resources/colors.dart';
-import 'package:manage_studio/resources/images.dart';
+import 'package:manage_studio/resources/strings_images.dart';
 import 'package:manage_studio/utils/string_validator.dart';
 
 class ItemCategories extends StatelessWidget {
@@ -32,14 +33,14 @@ class ItemCategories extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-          color: backgroundPadding ?? Colors.white,
+          color: backgroundPadding ?? Colors.transparent,
           height: 90.0,
           padding:
           EdgeInsets.only(top: 8.0, bottom: 8.0, right: 16.0, left: 16.0),
           child: Container(
             padding: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-                color: Color(0xba4bafff),
+                color: backgroundItem ?? AppColors.itemCategories,
                 borderRadius: BorderRadius.circular(10.0)),
             child: Row(children: [
               SizedBox(
@@ -49,7 +50,7 @@ class ItemCategories extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundColor: backgroundColor ?? AppColors.backgroundColor,
                   backgroundImage:
-                  backgroundImage ?? AssetImage(Images.logoLogin),
+                  backgroundImage ?? AssetImage(StringImages.logoLogin),
                 ),
               ),
               const SizedBox(width: 16.0),
@@ -82,7 +83,7 @@ class ItemCategories extends StatelessWidget {
               SizedBox(
                 height: 30,
                 width: 30,
-                child: icon ?? Images.iDropdown,
+                child: icon ?? AppIcon.iDropdown,
               )
             ]),
           )),

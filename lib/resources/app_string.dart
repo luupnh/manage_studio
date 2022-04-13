@@ -26,11 +26,24 @@ class AppStrings {
   static const String tryAgain = "Vui lòng thử lại!";
   static const String waitPlease = "Vui lòng đợi..." ;
 
-  static const String titleAppBar = "Quán Dê 19 Liên Hương" ;
+  //Overall Revenue
+  static const String titleAppBarOverallRevenue = "Quán Dê 19 Liên Hương" ;
   static const String titleCalendarAppBar = "Hôm nay" ;
   static const String totalRevenue = "Tổng quan doanh thu" ;
   static const String product = "Mặt hàng" ;
   static const String averageProductBill = "Trung bình mặt hàng/Hóa Đơn" ;
+  static const String revenue = "Doanh thu" ;
+  static const String receivable = "Công nợ phải thu" ;
+
+
+ //Customer
+  static const String titleAppBarCustomer = "Khách hàng" ;
+  static const String totalCustomer = "Tổng số khách hàng";
+  static const String newCustomer = "Mới cập nhật";
+  static const String notForgetCustomer = "Không thể quên";
+  static const String relationshipCustomer = "Khách hàng theo mối quan hệ";
+
+
 
 
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:manage_studio/resources/app_icon.dart';
 import 'package:manage_studio/resources/app_string.dart';
 import 'package:manage_studio/resources/colors.dart';
-import 'package:manage_studio/resources/images.dart';
+import 'package:manage_studio/resources/strings_images.dart';
 
 class DialogBuilder {
   DialogBuilder(this.context);
@@ -138,11 +138,11 @@ extension DialogTypeExtension on DialogType {
   Widget get icon {
     switch (this) {
       case DialogType.error:
-        return AppIcon(Images.iError);
+        return AppIconSvg(StringImages.iError);
       case DialogType.success:
-        return AppIcon(Images.iSuccess);
+        return AppIconSvg(StringImages.iSuccess);
       case DialogType.warning:
-        return AppIcon(Images.iWarning);
+        return AppIconSvg(StringImages.iWarning);
       default:
         return SizedBox();
     }

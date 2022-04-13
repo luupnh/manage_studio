@@ -8,10 +8,9 @@ import 'package:manage_studio/feature/login/login_bloc.dart';
 import 'package:manage_studio/feature/login/login_event.dart';
 import 'package:manage_studio/feature/login/login_state.dart';
 import 'package:manage_studio/resources/colors.dart';
-import 'package:manage_studio/resources/images.dart';
+import 'package:manage_studio/resources/strings_images.dart';
 import 'package:manage_studio/resources/app_string.dart';
 import 'package:manage_studio/utils/app_button.dart';
-import 'package:manage_studio/utils/app_dialog.dart';
 import 'package:manage_studio/utils/app_dialog.dart';
 import 'package:manage_studio/utils/enum_utils.dart';
 
@@ -104,7 +103,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       Container(
                         height: 150,
                         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                        child: Image.asset(Images.logoLogin, fit: BoxFit.fill),
+                        child: Image.asset(StringImages.logoLogin, fit: BoxFit.fill),
                       ),
                       //form login
                       Container(
@@ -207,7 +206,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     decoration: TextDecoration.none,
                                     fontFamily: 'AvoNormal',
                                     fontSize: 14,
-                                    color: AppColors.textColorsWhite,
+                                    color: AppColors.textColorsBlack,
                                     overflow: TextOverflow.clip)),
                           ),
                         ),
@@ -232,7 +231,7 @@ class _LoginWidgetState extends State<LoginWidget> {
     }
     if (state.clickedLoginStatus == LoginClickedStatus.success) {
       DialogBuilder(context).showDialogLoading(function: () {
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => HomeWidget()));
       });
     }
