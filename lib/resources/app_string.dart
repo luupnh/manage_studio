@@ -43,6 +43,10 @@ class AppStrings {
   static const String notForgetCustomer = "Không thể quên";
   static const String relationshipCustomer = "Khách hàng theo mối quan hệ";
 
+  //SearchCustomer
+  static const String search = "Tìm kiếm";
+
+
 
 
 

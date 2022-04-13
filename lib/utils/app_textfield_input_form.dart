@@ -17,7 +17,7 @@ class AppTextFieldInput extends StatelessWidget {
   final String? initialValue;
   final Color hintTextColor;
   final Color textColor;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final int? maxLength;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
@@ -72,7 +72,7 @@ class AppTextFieldInput extends StatelessWidget {
 
   const AppTextFieldInput.white(
       {Key? key,
-      this.backgroundColor = Colors.white,
+      this.backgroundColor,
       this.onTextChanged,
       this.focusNode,
       this.icon,
@@ -107,7 +107,7 @@ class AppTextFieldInput extends StatelessWidget {
     Color fillColor;
     if (colorScheme == AppInputTextFieldColorScheme.white) {
       if (enabled ?? true) {
-        fillColor = Colors.white;
+        fillColor = backgroundColor ?? Colors.white;
       } else {
         fillColor = Colors.blueGrey;
       }
@@ -190,6 +190,94 @@ class AppTextFieldInput extends StatelessWidget {
               }
             },
             autocorrect: false,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class AppTextField extends StatelessWidget {
+  final Color? backgroundColor;
+  final Color? textColor;
+  final Color? cursorColor;
+  final double? width;
+  final double? height;
+  final double? borderRadius;
+  final double? fontSize;
+  final FontWeight? fontWeight;
+  final ValueChanged<String>? onChanged;
+  final TextEditingController textEditingController;
+  final Widget? suffixIcon;
+  final Color? suffixIconColor;
+  final String? hintText;
+  final String? textError;
+  final int? maxLines;
+  final int? minLines;
+  final bool? obscureText;
+  final Color? borderColor;
+
+
+  const AppTextField({
+    Key? key,
+    this.backgroundColor,
+    this.width,
+    this.height,
+    this.textColor,
+    this.cursorColor,
+    this.borderRadius,
+    this.fontSize,
+    this.fontWeight,
+    this.onChanged,
+    required this.textEditingController,
+    this.suffixIcon,
+    this.suffixIconColor,
+    this.hintText,
+    this.textError,
+    this.maxLines,
+    this.minLines, this.obscureText, this.borderColor,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: Container(
+        width: width,
+        height: height ?? 50.0,
+        decoration: BoxDecoration(
+          color: backgroundColor ?? Colors.white,
+          borderRadius: BorderRadius.circular(borderRadius ?? 20),
+        ),
+        child: Theme(
+          data: Theme.of(context).copyWith(
+              colorScheme: Theme.of(context)
+                  .colorScheme
+                  .copyWith(primary: AppColors.primaryColor)),
+          child: TextField(
+            style: TextStyle(
+                color: textColor ?? AppColors.textColorsBlack,
+                fontWeight: fontWeight ?? FontWeight.normal,
+                fontSize: fontSize ?? 18.0),
+
+            maxLines: maxLines ?? 1,
+            minLines: minLines ?? 1,
+            obscureText: obscureText ?? false,
+            onChanged: onChanged,
+            controller: textEditingController,
+            cursorColor: cursorColor ?? AppColors.primaryColor,
+            decoration: InputDecoration(
+              suffixIcon: suffixIcon,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 20.0)),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              hintText: hintText ?? null,
+              hintStyle: TextStyle(
+                  color: textColor ?? AppColors.textColorsGrey,
+                  fontWeight: fontWeight ?? FontWeight.normal,
+                  fontSize: fontSize ?? 18.0),
+              errorText: (textError == "ok" ? null : textError),
+            ),
           ),
         ),
       ),

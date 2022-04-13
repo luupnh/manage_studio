@@ -1,11 +1,8 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:manage_studio/components/bottom_navigation_bar.dart';
 import 'package:manage_studio/feature/home/customer/customer_widget.dart';
 import 'package:manage_studio/feature/home/overall_revenue/overall_revenue_widget.dart';
-import 'package:manage_studio/resources/app_string.dart';
 import 'package:manage_studio/resources/colors.dart';
-import 'package:manage_studio/resources/strings_images.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);

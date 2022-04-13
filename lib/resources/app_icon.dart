@@ -29,7 +29,13 @@ class AppIcon {
   static const Icon iCalendarTitleAppBar = Icon(FontAwesomeIcons.calendarMinus , size: 20, color: AppColors.textColorsWhite);
   static const Icon iDropdown = Icon(FontAwesomeIcons.squareCaretDown , size: 20, color: AppColors.primaryColor);
   static const Icon iCustomer = Icon(FontAwesomeIcons.userLarge , size: 20, color: AppColors.backgroundColor);
-  static const Icon iSearch = Icon(FontAwesomeIcons.magnifyingGlass, size: 20, color: AppColors.iconCustomer);
+  static const Icon iSearch = Icon(FontAwesomeIcons.magnifyingGlass, size: 20);
   static const Icon iPlus = Icon(FontAwesomeIcons.plus, size: 20, color: AppColors.iconCustomer);
   static const Icon iChart = Icon(FontAwesomeIcons.chartLine, size: 20, color: AppColors.iconCustomer);
+  static const Icon iUser = Icon(FontAwesomeIcons.user, size: 15.0);
+  static const Icon iEyeSlash = Icon(FontAwesomeIcons.eyeSlash, size: 15.0, color: AppColors.iconLogin);
+  static const Icon iEye = Icon(FontAwesomeIcons.eye, size: 15.0, color: AppColors.iconLogin);
+  static const Icon iFilter = Icon(FontAwesomeIcons.filter, color: AppColors.iconSearchCustomer);
+
+
 }

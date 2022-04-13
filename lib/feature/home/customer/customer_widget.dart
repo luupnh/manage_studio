@@ -471,7 +471,7 @@ class _CustomerWidgetState extends State<CustomerWidget> {
                 overflow: TextOverflow.clip)),
         leading: IconButton(
           onPressed: _openEndDrawer,
-          icon: AppIcon.iSearch,
+          icon: AppIcon.iSearch, color: AppColors.iconCustomer,
         ),
         actions: [
           IconButton(

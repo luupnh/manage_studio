@@ -4,6 +4,7 @@ class AppColors {
   const AppColors();
   static const Color backgroundColor = Color(0xffffffff);
   static const Color backgroundLight = Color(0xFFFAFAFA);
+  static const Color backgroundGrey = Color(0xFFACABAB);
 
   static const Color primaryColor = Color(0xff8968fc);
   static const Color secondaryColor = Color(0xffffc656);
@@ -11,6 +12,8 @@ class AppColors {
   static const Color shadowColor = Color(0xFFE9E9E2);
   static const Color shadowIconAverage = Color(0xffb6e5ff);
   static const Color borderGrey = Color(0xFF8A8A8A);
+  static const Color error = Color(0xFFFF0000);
+
 
 
 
@@ -26,8 +29,11 @@ class AppColors {
   static const Color textColorsWhite = Color(0xffffffff);
   static const Color waitingIndicator = Color(0xffffffff);
 
-  //Customer
+  //icon
   static const Color iconCustomer = Color(0xFF000000);
+  static const Color iconSearchCustomer = Color(0xFF807F7F);
+
+  static const Color iconLogin = Color(0xFF807F7F);
 
 
 
