@@ -36,6 +36,9 @@ class AppIcon {
   static const Icon iEyeSlash = Icon(FontAwesomeIcons.eyeSlash, size: 15.0, color: AppColors.iconLogin);
   static const Icon iEye = Icon(FontAwesomeIcons.eye, size: 15.0, color: AppColors.iconLogin);
   static const Icon iFilter = Icon(FontAwesomeIcons.filter, color: AppColors.iconSearchCustomer);
+  static const Icon iError = Icon(FontAwesomeIcons.triangleExclamation,size: 50.0 , color: AppColors.backgroundColor);
+  static const Icon iSave = Icon(FontAwesomeIcons.save,size: 25.0 , color: AppColors.textColorsWhite);
+
 
 
 }

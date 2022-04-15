@@ -89,6 +89,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Container(
+                    height: MediaQuery.of(context).size.height - (MediaQuery.of(context).viewPadding.top * 4),
                     decoration: BoxDecoration(
                         color: AppColors.backgroundColor,
                         borderRadius: BorderRadius.circular(20.0)),

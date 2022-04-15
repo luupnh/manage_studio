@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:manage_studio/feature/home/customer/customer_item/customer_overall_header.dart';
+import 'package:manage_studio/feature/home/customer/edit_customer/edit_customer_widget.dart';
 import 'package:manage_studio/feature/home/customer/search_customer/search_customer_widget.dart';
 import 'package:manage_studio/resources/app_icon.dart';
 import 'package:manage_studio/resources/app_string.dart';
@@ -27,7 +28,7 @@ class _CustomerWidgetState extends State<CustomerWidget> {
           children: [
             CustomerOverallHeader(),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(15.0),
               child: Container(
                 width: size,
                 decoration: BoxDecoration(
@@ -479,7 +480,12 @@ class _CustomerWidgetState extends State<CustomerWidget> {
             icon: AppIcon.iChart,
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const EditCustomer()),
+              );
+            },
             icon: AppIcon.iPlus,
           ),
         ],

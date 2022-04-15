@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:manage_studio/resources/app_icon.dart';
 import 'package:manage_studio/resources/app_string.dart';
@@ -112,15 +113,28 @@ class _SearchCustomerWidgetState extends State<SearchCustomerWidget> {
                               child: Hero(
                                 tag: 1,
                                 child: Container(
-                                    width: 40.0,
-                                    height: 40.0,
-                                    decoration: new BoxDecoration(
-                                      shape: BoxShape.rectangle,
-                                      image: new DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(
-                                              "https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-6/273681429_1924227924430649_1095688089624265862_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=8K763b1L59UAX_4el48&_nc_ht=scontent.fsgn5-9.fna&oh=00_AT_2dY2lDsEF-NLbX3ZusoSvNi8966Cp3-pwQOaKmepuCw&oe=625C961A")),
-                                    )),
+                                  width: 40.0,
+                                  height: 40.0,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                  ),
+                                  child: Image.network(
+                                    "https://jes.edu.vn/wp-content/uploads/2017/10/h%C3%ACnh-%E1%BA%A3nh.jpg",
+                                    fit: BoxFit.fill,
+                                    loadingBuilder: (BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent? loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return Center(
+                                        child: CupertinoActivityIndicator(
+                                          color:
+                                              AppColors.waitingIndicatorBlack,
+                                          animating: true,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
                               ),
                             ),
                             SizedBox(

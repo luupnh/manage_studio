@@ -92,8 +92,8 @@ class DialogBuilder {
             onWillPop: () async => true,
             child: Center(
               child: Container(
-                height: 100.0,
-                width: 100.0,
+                height: 200.0,
+                width: 200.0,
                 decoration: BoxDecoration(
                     color: AppColors.backgroundColor,
                     borderRadius: BorderRadius.circular(10.0)),
@@ -101,16 +101,58 @@ class DialogBuilder {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
-                          height: 40.0, width: 40.0, child: dialogType.icon),
+                      Container(
+                        width: 200,
+                        height: 60.0,
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10.0),
+                                topRight: Radius.circular(10.0))),
+                        child: AppIcon.iError,
+                      ),
                       SizedBox(height: 10.0),
-                      Text(dialogType.title,
-                          maxLines: 1,
-                          style: TextStyle(
-                              fontFamily: 'AvoNormal',
-                              fontSize: 12,
-                              decoration: TextDecoration.none,
-                              color: AppColors.textColorsBlack)),
+                      Expanded(
+                        child: Center(
+                          child: Text(dialogType.title,
+                              maxLines: 1,
+                              style: TextStyle(
+                                  fontFamily: 'AvoNormal',
+                                  fontSize: 12,
+                                  decoration: TextDecoration.none,
+                                  color: AppColors.textColorsBlack)),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          height: 30.0,
+                          width: 80.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.red,
+                                  spreadRadius: 1,
+                                  blurRadius: 1,
+                                  blurStyle: BlurStyle.outer),
+                            ],
+                          ),
+                          child: Center(
+                            child: Text(AppStrings.close,
+                                style: TextStyle(
+                                    decoration: TextDecoration.none,
+                                    fontFamily: 'AvoNormal',
+                                    fontSize: 14,
+                                    color: Colors.red,
+                                    overflow: TextOverflow.clip)),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10.0),
                     ]),
               ),
             ),

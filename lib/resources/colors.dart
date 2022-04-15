@@ -28,6 +28,8 @@ class AppColors {
 
   static const Color textColorsWhite = Color(0xffffffff);
   static const Color waitingIndicator = Color(0xffffffff);
+  static const Color waitingIndicatorBlack = Color(0xFF000000);
+
 
   //icon
   static const Color iconCustomer = Color(0xFF000000);
